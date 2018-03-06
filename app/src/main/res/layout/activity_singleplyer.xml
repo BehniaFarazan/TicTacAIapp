@@ -34,7 +34,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/text_view_p1"
-            android:text="Player 2:"
+            android:text="AI:"
             android:textSize="30sp" />
 
         <Button
