@@ -18,7 +18,7 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
         return btnArray.toString();
     }
 
-boolean p1turn = true ;
+    boolean p1turn = true ;
     boolean p2turn = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ boolean p1turn = true ;
             for (int j = 0; j < btnArray[0].length; j++) {
             btnArray[i][j] = (Button) findViewById(btnIdArray[i][j]);
             btnArray[i][j].setOnClickListener(this);
+
         }
         }
     }
@@ -54,7 +55,7 @@ boolean p1turn = true ;
                 p2turn=false;
                 p1turn=true;
             }}
-          
+
             //mylogic.cheackWin();
     }
 
