@@ -3,17 +3,92 @@ package com.example.behnia.tictacaiapp;
 import android.view.View;
 import android.widget.Button;
 
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.getTotalcounter;
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.totalcounter;
+
 /**
  * Created by Behnia on 06-03-18.
  */
 
 public class MultiplayerLogic {
     private static MultiplayerLogic instance;
-    MultiplayerActivity ma = new MultiplayerActivity();
+    private int p2Score, p1Score, thisIsnrTotChoise;
+    private boolean thisGameIsWon;
+    static {
+        try {
+            instance = new MultiplayerLogic();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static synchronized MultiplayerLogic getInstance() {
+        return instance;
+    }
+
+    public void reset() {
+        p2Score = 0;
+        p1Score = 0;
+        thisIsnrTotChoise = 0;
+        thisGameIsWon = false;
+    }
+    public Boolean cheackTurn() {
+        thisIsnrTotChoise= getTotalcounter();
+        if (thisIsnrTotChoise==1||thisIsnrTotChoise==3||thisIsnrTotChoise==5||thisIsnrTotChoise==7||thisIsnrTotChoise==9){
+           return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+    /*public void choice (int p1Score, boolean p1Turn) {
+       thisIsnrTotChoise++;
+        if (thisIsnrTotChoise==1||thisIsnrTotChoise==3||thisIsnrTotChoise==5||thisIsnrTotChoise==7||thisIsnrTotChoise==9) {
+            p1Score ++;
+            p1Turn = true;
+
+        } else {
+            p2Score ++;
+          p1Turn=false;
+
+        }
+    }
+
+
+
+
+    MultiplayerActivity multi = new MultiplayerActivity();
+    private static MultiplayerLogic instance;
+
+    int counter = multi.getTotalcounter();
+
+    public void cheackTurn() {
+        if (counter==1||counter==3||counter==5||counter==7||counter==9){
+          p1turn=true;
+        }
+        else {
+            p2turn = true;
+        }
+    }
+
+
     String x = "X";
     String o = "O";
-private Boolean p1turn,p2turn;
+
+
+    private Boolean p1turn,p2turn;
+
+
     private int round;
+    public boolean p1Turn;
+
     MultiplayerLogic(){
         start();
         roundStart();
@@ -43,8 +118,7 @@ private Boolean p1turn,p2turn;
     }
 
     private void start() {
-        p1turn=true;
-        p2turn=true;
+       cheackTurn();
     }
     void pOneTurn()
     {
@@ -71,7 +145,11 @@ pTwoChoose();
 
     public void cheackWin(View view) {
        // if(ma.btnIdArray[0][0]=x&& ma.btnIdArray[0][1]= x){
-
         }
-    }
+
+
+*/
+
+
+}
 
