@@ -14,21 +14,16 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
     private final Button[][] btnArray = new Button[3][3];
 
     int[][] btnIdArray = {{R.id.button_00, R.id.button_01, R.id.button_02}, {R.id.button_10, R.id.button_11, R.id.button_12}, {R.id.button_20, R.id.button_21, R.id.button_22}};
-boolean p1Turn;
-    public static int totalcounter;
 
+   static int totalcounter;
+    static int choisecounterP1;
+    static int choisecounterP2;
     public static int getTotalcounter() {
         return totalcounter;
     }
-
-    static int choisecounterP2;
-
-
     public static int getChoisecounterP2() {
         return choisecounterP2;
     }
-
-    static int choisecounterP1;
 
     public static int getChoisecounterP1() {
         return choisecounterP1;
@@ -36,7 +31,7 @@ boolean p1Turn;
 
     TextView p1Score, p2Score;
 
-    //boolean p1turn = mylogic.getP1turn();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,20 +61,29 @@ boolean p1Turn;
          // mylogic.cheackTurn();
             if (mylogic.cheackTurn()) {
               //  correctGuess(v);
+                choisecounterP1++;
                 ((Button) view).setText("X");
                 ((Button) view).setTextColor(Color.RED);
-                p1Score.setText(String.valueOf(totalcounter));
+                p1Score.setText(String.valueOf(choisecounterP1));
             } else {
                // wrongGuess(v);
+                choisecounterP2++;
                 ((Button) view).setText("O");
                 ((Button) view).setTextColor(Color.GREEN);
+                p2Score.setText(String.valueOf(choisecounterP2));
 
             }
         view.setEnabled(false);
     }
 
 
+     //   public void correctGuess(View view) {
+       //     ((Button) view).setTextColor(Color.GREEN);
+        //}
 
+        //public void wrongGuess(View view) {
+          //  ((Button) view).setTextColor(Color.RED);
+        //}
 
 
      /*   if (view instanceof Button) {
