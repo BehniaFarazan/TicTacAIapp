@@ -1,11 +1,17 @@
 package com.example.behnia.tictacaiapp;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Stack;
 
 public class MultiplayerActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,6 +24,16 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
     static int totalcounter;
     static int choisecounterP1;
     static int choisecounterP2;
+    static ArrayList<Double> p1Locs = new ArrayList<Double>();
+    static ArrayList<Double> p2Locs = new ArrayList<Double>();
+
+    public static ArrayList<Double> getP1Locs() {
+        return p1Locs;
+    }
+
+    public static ArrayList<Double> getP2Locs() {
+        return p2Locs;
+    }
 
     public static int getTotalcounter() {
         return totalcounter;
@@ -86,6 +102,23 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    public void checkLocs() {
+
+        for (int i = 0; i < btnArray.length; i++) {
+            for (int j = 0; j < btnArray[0].length; j++) {
+                btnArray[i][j] = (Button) findViewById(btnIdArray[i][j]);
+                if (btnArray[i][j].getText().equals("X")) {
+                    double xy = Double.parseDouble(i + "." + j);
+                    p1Locs.add(xy);
+                } else if (btnArray[i][j].equals("O")) {
+                    double xy = Double.parseDouble(i + "." + j);
+                    p2Locs.add(xy);
+                }
+            }
+        }
+    }
+
+
     public void p1Choice(View view) {
         choisecounterP1++;
         ((Button) view).setText("X");
@@ -104,7 +137,7 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
 
         if (view instanceof Button) {
-
+            checkLocs();
             totalcounter++;
             if (mylogic.cheackTurn()) {
                 p1Choice(view);
@@ -114,7 +147,13 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
 
             }
             view.setEnabled(false);
+            mylogic.cheackWin();
+            if (mylogic.cheackWin()) {
+                Intent i = new Intent(MultiplayerActivity.this, FinitogameActivity.class);
+                startActivity(i);
+            }
         }
+
 
 
         //public void wrongGuess(View view) {

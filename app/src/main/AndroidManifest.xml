@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".GameMenuActivity" />
         <activity android:name=".SingleplyerActivity" />
-        <activity android:name=".MultiplayerActivity"></activity>
+        <activity android:name=".MultiplayerActivity" />
+        <activity android:name=".FinitogameActivity"></activity>
     </application>
 
 </manifest>

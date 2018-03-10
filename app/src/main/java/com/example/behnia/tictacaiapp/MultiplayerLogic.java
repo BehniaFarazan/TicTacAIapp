@@ -3,6 +3,12 @@ package com.example.behnia.tictacaiapp;
 import android.view.View;
 import android.widget.Button;
 
+import java.lang.reflect.Array;
+
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.getChoisecounterP1;
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.getChoisecounterP2;
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.getP1Locs;
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.getP2Locs;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.getTotalcounter;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.setChoisecounterP1;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.setChoisecounterP2;
@@ -17,6 +23,8 @@ public class MultiplayerLogic {
     private static MultiplayerLogic instance;
     private int p2Score, p1Score, thisIsnrTotChoise;
     private boolean thisGameIsWon;
+    private boolean p1WON;
+    private boolean p2WON;
 
     static {
         try {
@@ -34,7 +42,10 @@ public class MultiplayerLogic {
         setChoisecounterP1(0);
         setChoisecounterP2(0);
         setTotalcounter(1);
-        thisGameIsWon = false;
+        p1WON=false;
+        p2WON=false;
+getP1Locs().clear();
+        getP2Locs().clear();
     }
 
     public Boolean cheackTurn() {
@@ -47,7 +58,32 @@ public class MultiplayerLogic {
         }
     }
 
+    public boolean isWin() {
+        if (getP1Locs().contains(0.0) && getP1Locs().contains(0.1) && getP1Locs().contains(0.2)) {
+            p1WON = true;
+            return true;
+        } else if (getP1Locs().contains(1.0) && getP1Locs().contains(1.1) && getP1Locs().contains(1.2)) {
+            p1WON = true;
+            return true;
+        } else if (getP1Locs().contains(0.0) && getP1Locs().contains(1.0) && getP1Locs().contains(2.0)) {
+            p1WON = true;
+            return true;
+            //} else if () {
 
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean cheackWin() {
+        if (isWin()) {
+            //if (){
+            return true;
+            //}
+        } else {
+            return false;
+        }
+    }
 
 
 
