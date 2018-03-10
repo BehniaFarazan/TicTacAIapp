@@ -26,6 +26,8 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
     static int choisecounterP2;
     static ArrayList<Double> p1Locs = new ArrayList<Double>();
     static ArrayList<Double> p2Locs = new ArrayList<Double>();
+    static boolean p1WON,p2WON;
+
 
     public static ArrayList<Double> getP1Locs() {
         return p1Locs;
@@ -156,13 +158,22 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
             }
             view.setEnabled(false);
             checkLocs();
-            mylogic.cheackWin();
+           // mylogic.cheackWin();
             if (mylogic.cheackWin()) {
-
-                Intent i = new Intent(MultiplayerActivity.this, FinitogameActivity.class);
-                startActivity(i);
+                if (mylogic.cheackTurn()) {
+                    p1WON = true;
+                    p2WON = false;
+                }
+            else {
+                p2WON = true;
+                p1WON = false;
             }
+            Intent i = new Intent(MultiplayerActivity.this, FinitogameActivity.class);
+            startActivity(i);
         }
+        }
+
+
 
 
 
