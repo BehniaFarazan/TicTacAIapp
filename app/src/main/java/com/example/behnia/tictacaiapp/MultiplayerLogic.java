@@ -4,7 +4,9 @@ import android.view.View;
 import android.widget.Button;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.getBtnArray;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.getChoisecounterP1;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.getChoisecounterP2;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.getP1Locs;
@@ -25,7 +27,8 @@ public class MultiplayerLogic {
     private boolean thisGameIsWon;
     private boolean p1WON;
     private boolean p2WON;
-
+private boolean case1,case2,case3,case4,case5,case6;
+    //static ArrayList<Double> case1 = new ArrayList<Double>();
     static {
         try {
             instance = new MultiplayerLogic();
@@ -46,6 +49,7 @@ public class MultiplayerLogic {
         p2WON=false;
 getP1Locs().clear();
         getP2Locs().clear();
+
     }
 
     public Boolean cheackTurn() {
@@ -58,21 +62,97 @@ getP1Locs().clear();
         }
     }
 
-    public boolean isWin() {
+   /* public boolean isWin() {
         if (getP1Locs().contains(0.0) && getP1Locs().contains(0.1) && getP1Locs().contains(0.2)) {
-            p1WON = true;
+    p1WON = true;
             return true;
         } else if (getP1Locs().contains(1.0) && getP1Locs().contains(1.1) && getP1Locs().contains(1.2)) {
             p1WON = true;
             return true;
-        } else if (getP1Locs().contains(0.0) && getP1Locs().contains(1.0) && getP1Locs().contains(2.0)) {
+        } else if (getP1Locs().contains(2.0) && getP1Locs().contains(2.1) && getP1Locs().contains(2.2)) {
             p1WON = true;
             return true;
-            //} else if () {
 
         } else {
             return false;
         }
+    }*/
+    private boolean isWin() {
+        String[][] field = new String[3][3];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                field[i][j] = getBtnArray()[i][j].getText().toString();
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            if (field[i][0].equals(field[i][1])
+                    && field[i][0].equals(field[i][2])
+                    && !field[i][0].equals("")) {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            if (field[0][i].equals(field[1][i])
+                    && field[0][i].equals(field[2][i])
+                    && !field[0][i].equals("")) {
+                return true;
+            }
+        }
+
+        if (field[0][0].equals(field[1][1])
+                && field[0][0].equals(field[2][2])
+                && !field[0][0].equals("")) {
+            return true;
+        }
+
+        if (field[0][2].equals(field[1][1])
+                && field[0][2].equals(field[2][0])
+                && !field[0][2].equals("")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void whichWayWho() {
+
+       /* for (int i = 0; i < 3; i++) {
+            double xy = Double.parseDouble(0 + "." + i);
+
+            for (int j = 0; j < 3; j++) {
+
+            }
+        }
+
+
+       if (getP1Locs().contains(0.0) && getP1Locs().contains(0.1) && getP1Locs().contains(0.2)) {
+            p1WON = true;
+            case1 = true;
+        } else if (getP1Locs().contains(1.0) && getP1Locs().contains(1.1) && getP1Locs().contains(1.2)) {
+            p1WON = true;
+            case1 = true;
+        } else if (getP1Locs().contains(2.0) && getP1Locs().contains(2.1) && getP1Locs().contains(2.2)) {
+            p1WON = true;
+            case1 = true;
+
+        }else if (getP1Locs().contains(0.0) && getP1Locs().contains(1.0) && getP1Locs().contains(2.0)) {
+            p1WON = true;
+            case1 = true;
+
+        }else if (getP1Locs().contains(0.1) && getP1Locs().contains(1.1) && getP1Locs().contains(2.1)) {
+            p1WON = true;
+            case1 = true;
+
+        }else if (getP1Locs().contains(0.2) && getP1Locs().contains(1.2) && getP1Locs().contains(2.2)) {
+            p1WON = true;
+            case1 = true;
+
+        }*/
+
+
     }
 
     public Boolean cheackWin() {

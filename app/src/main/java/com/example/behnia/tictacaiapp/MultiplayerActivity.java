@@ -17,7 +17,7 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
 
     private final MultiplayerLogic mylogic = MultiplayerLogic.getInstance();
 
-    private final Button[][] btnArray = new Button[3][3];
+    private static final Button[][] btnArray = new Button[3][3];
 
     int[][] btnIdArray = {{R.id.button_00, R.id.button_01, R.id.button_02}, {R.id.button_10, R.id.button_11, R.id.button_12}, {R.id.button_20, R.id.button_21, R.id.button_22}};
 
@@ -89,6 +89,10 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    public static Button[][] getBtnArray() {
+        return btnArray;
+    }
+
     public void updateDisplay() {
         p1Score.setText(String.valueOf(choisecounterP1));
         p2Score.setText(String.valueOf(choisecounterP2));
@@ -109,10 +113,18 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
                 btnArray[i][j] = (Button) findViewById(btnIdArray[i][j]);
                 if (btnArray[i][j].getText().equals("X")) {
                     double xy = Double.parseDouble(i + "." + j);
+                    if (p1Locs.contains(xy)){
+
+                    }else{
                     p1Locs.add(xy);
+                    }
                 } else if (btnArray[i][j].equals("O")) {
                     double xy = Double.parseDouble(i + "." + j);
-                    p2Locs.add(xy);
+                    if (p2Locs.contains(xy)){
+
+                    }else{
+                        p2Locs.add(xy);
+                    }
                 }
             }
         }
@@ -135,20 +147,18 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-
         if (view instanceof Button) {
-            checkLocs();
             totalcounter++;
             if (mylogic.cheackTurn()) {
                 p1Choice(view);
-
             } else {
                 p2Choice(view);
-
             }
             view.setEnabled(false);
+            checkLocs();
             mylogic.cheackWin();
             if (mylogic.cheackWin()) {
+
                 Intent i = new Intent(MultiplayerActivity.this, FinitogameActivity.class);
                 startActivity(i);
             }
