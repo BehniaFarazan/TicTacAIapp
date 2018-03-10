@@ -23,6 +23,10 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
         return totalcounter;
     }
 
+    public static void setTotalcounter(int totalcounter) {
+        MultiplayerActivity.totalcounter = totalcounter;
+    }
+
     public static int getChoisecounterP2() {
         return choisecounterP2;
     }
@@ -64,11 +68,23 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(View v) {
                 mylogic.reset();
-                //p1Score.setText("blva");
+                updateDisplay();
             }
         });
     }
 
+    public void updateDisplay() {
+        p1Score.setText(String.valueOf(choisecounterP1));
+        p2Score.setText(String.valueOf(choisecounterP2));
+        for (int i = 0; i < btnArray.length; i++) {
+            for (int j = 0; j < btnArray[0].length; j++) {
+                btnArray[i][j] = (Button) findViewById(btnIdArray[i][j]);
+                btnArray[i][j].setEnabled(true);
+                btnArray[i][j].setText("");
+            }
+        }
+
+    }
 
     public void p1Choice(View view) {
         choisecounterP1++;
@@ -90,7 +106,6 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
         if (view instanceof Button) {
 
             totalcounter++;
-            // mylogic.cheackTurn();
             if (mylogic.cheackTurn()) {
                 p1Choice(view);
 

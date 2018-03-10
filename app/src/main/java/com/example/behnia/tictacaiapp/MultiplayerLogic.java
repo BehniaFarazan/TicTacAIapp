@@ -6,6 +6,7 @@ import android.widget.Button;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.getTotalcounter;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.setChoisecounterP1;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.setChoisecounterP2;
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.setTotalcounter;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.totalcounter;
 
 /**
@@ -32,13 +33,14 @@ public class MultiplayerLogic {
     public void reset() {
         setChoisecounterP1(0);
         setChoisecounterP2(0);
-        thisIsnrTotChoise = 0;
+        setTotalcounter(1);
         thisGameIsWon = false;
     }
 
     public Boolean cheackTurn() {
         thisIsnrTotChoise = getTotalcounter();
-        if (thisIsnrTotChoise == 1 || thisIsnrTotChoise == 3 || thisIsnrTotChoise == 5 || thisIsnrTotChoise == 7 || thisIsnrTotChoise == 9) {
+        //if (thisIsnrTotChoise == 1 || thisIsnrTotChoise == 3 || thisIsnrTotChoise == 5 || thisIsnrTotChoise == 7 || thisIsnrTotChoise == 9) {
+        if ((thisIsnrTotChoise % 2) == 0) {
             return true;
         } else {
             return false;
