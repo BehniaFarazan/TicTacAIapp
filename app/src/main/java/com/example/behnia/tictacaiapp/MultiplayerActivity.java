@@ -15,18 +15,28 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
 
     int[][] btnIdArray = {{R.id.button_00, R.id.button_01, R.id.button_02}, {R.id.button_10, R.id.button_11, R.id.button_12}, {R.id.button_20, R.id.button_21, R.id.button_22}};
 
-   static int totalcounter;
+    static int totalcounter;
     static int choisecounterP1;
     static int choisecounterP2;
+
     public static int getTotalcounter() {
         return totalcounter;
     }
+
     public static int getChoisecounterP2() {
         return choisecounterP2;
     }
 
     public static int getChoisecounterP1() {
         return choisecounterP1;
+    }
+
+    public static void setChoisecounterP1(int choisecounterP1) {
+        MultiplayerActivity.choisecounterP1 = choisecounterP1;
+    }
+
+    public static void setChoisecounterP2(int choisecounterP2) {
+        MultiplayerActivity.choisecounterP2 = choisecounterP2;
     }
 
     TextView p1Score, p2Score;
@@ -48,9 +58,31 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
                 btnArray[i][j].setOnClickListener(this);
             }
         }
+        final Button buttonNewgame = (Button) findViewById(R.id.button_reset);
+        buttonNewgame.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mylogic.reset();
+                //p1Score.setText("blva");
+            }
+        });
     }
 
 
+    public void p1Choice(View view) {
+        choisecounterP1++;
+        ((Button) view).setText("X");
+        ((Button) view).setTextColor(Color.RED);
+        p1Score.setText(String.valueOf(choisecounterP1));
+    }
+
+    public void p2Choice(View view) {
+        choisecounterP2++;
+        ((Button) view).setText("O");
+        ((Button) view).setTextColor(Color.GREEN);
+        p2Score.setText(String.valueOf(choisecounterP2));
+    }
 
     @Override
     public void onClick(View view) {
@@ -58,31 +90,20 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
         if (view instanceof Button) {
 
             totalcounter++;
-         // mylogic.cheackTurn();
+            // mylogic.cheackTurn();
             if (mylogic.cheackTurn()) {
-              //  correctGuess(v);
-                choisecounterP1++;
-                ((Button) view).setText("X");
-                ((Button) view).setTextColor(Color.RED);
-                p1Score.setText(String.valueOf(choisecounterP1));
+                p1Choice(view);
+
             } else {
-               // wrongGuess(v);
-                choisecounterP2++;
-                ((Button) view).setText("O");
-                ((Button) view).setTextColor(Color.GREEN);
-                p2Score.setText(String.valueOf(choisecounterP2));
+                p2Choice(view);
 
             }
-        view.setEnabled(false);
-    }
+            view.setEnabled(false);
+        }
 
-
-     //   public void correctGuess(View view) {
-       //     ((Button) view).setTextColor(Color.GREEN);
-        //}
 
         //public void wrongGuess(View view) {
-          //  ((Button) view).setTextColor(Color.RED);
+        //  ((Button) view).setTextColor(Color.RED);
         //}
 
 

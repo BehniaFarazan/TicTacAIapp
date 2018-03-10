@@ -4,6 +4,8 @@ import android.view.View;
 import android.widget.Button;
 
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.getTotalcounter;
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.setChoisecounterP1;
+import static com.example.behnia.tictacaiapp.MultiplayerActivity.setChoisecounterP2;
 import static com.example.behnia.tictacaiapp.MultiplayerActivity.totalcounter;
 
 /**
@@ -14,6 +16,7 @@ public class MultiplayerLogic {
     private static MultiplayerLogic instance;
     private int p2Score, p1Score, thisIsnrTotChoise;
     private boolean thisGameIsWon;
+
     static {
         try {
             instance = new MultiplayerLogic();
@@ -21,22 +24,23 @@ public class MultiplayerLogic {
             throw new RuntimeException(e);
         }
     }
+
     public static synchronized MultiplayerLogic getInstance() {
         return instance;
     }
 
     public void reset() {
-        p2Score = 0;
-        p1Score = 0;
+        setChoisecounterP1(0);
+        setChoisecounterP2(0);
         thisIsnrTotChoise = 0;
         thisGameIsWon = false;
     }
+
     public Boolean cheackTurn() {
-        thisIsnrTotChoise= getTotalcounter();
-        if (thisIsnrTotChoise==1||thisIsnrTotChoise==3||thisIsnrTotChoise==5||thisIsnrTotChoise==7||thisIsnrTotChoise==9){
-           return true;
-        }
-        else {
+        thisIsnrTotChoise = getTotalcounter();
+        if (thisIsnrTotChoise == 1 || thisIsnrTotChoise == 3 || thisIsnrTotChoise == 5 || thisIsnrTotChoise == 7 || thisIsnrTotChoise == 9) {
+            return true;
+        } else {
             return false;
         }
     }
