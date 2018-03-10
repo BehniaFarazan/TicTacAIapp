@@ -27,7 +27,8 @@ public class MultiplayerLogic {
     private boolean thisGameIsWon;
     private boolean p1WON;
     private boolean p2WON;
-private boolean case1,case2,case3,case4,case5,case6;
+    private boolean case1, case2, case3, case4, case5, case6;
+
     //static ArrayList<Double> case1 = new ArrayList<Double>();
     static {
         try {
@@ -45,9 +46,9 @@ private boolean case1,case2,case3,case4,case5,case6;
         setChoisecounterP1(0);
         setChoisecounterP2(0);
         setTotalcounter(1);
-        p1WON=false;
-        p2WON=false;
-getP1Locs().clear();
+        p1WON = false;
+        p2WON = false;
+        getP1Locs().clear();
         getP2Locs().clear();
 
     }
@@ -62,21 +63,21 @@ getP1Locs().clear();
         }
     }
 
-   /* public boolean isWin() {
-        if (getP1Locs().contains(0.0) && getP1Locs().contains(0.1) && getP1Locs().contains(0.2)) {
-    p1WON = true;
-            return true;
-        } else if (getP1Locs().contains(1.0) && getP1Locs().contains(1.1) && getP1Locs().contains(1.2)) {
-            p1WON = true;
-            return true;
-        } else if (getP1Locs().contains(2.0) && getP1Locs().contains(2.1) && getP1Locs().contains(2.2)) {
-            p1WON = true;
-            return true;
+    /* public boolean isWin() {
+         if (getP1Locs().contains(0.0) && getP1Locs().contains(0.1) && getP1Locs().contains(0.2)) {
+     p1WON = true;
+             return true;
+         } else if (getP1Locs().contains(1.0) && getP1Locs().contains(1.1) && getP1Locs().contains(1.2)) {
+             p1WON = true;
+             return true;
+         } else if (getP1Locs().contains(2.0) && getP1Locs().contains(2.1) && getP1Locs().contains(2.2)) {
+             p1WON = true;
+             return true;
 
-        } else {
-            return false;
-        }
-    }*/
+         } else {
+             return false;
+         }
+     }*/
     private boolean isWin() {
         String[][] field = new String[3][3];
 

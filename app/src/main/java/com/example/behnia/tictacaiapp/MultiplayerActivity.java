@@ -1,8 +1,10 @@
 package com.example.behnia.tictacaiapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -168,8 +170,18 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
                 p2WON = true;
                 p1WON = false;
             }
-            Intent i = new Intent(MultiplayerActivity.this, FinitogameActivity.class);
-            startActivity(i);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Look at this dialog!")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                 Intent i = new Intent(MultiplayerActivity.this, FinitogameActivity.class);
+                                startActivity(i);
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+
         }
         }
 
