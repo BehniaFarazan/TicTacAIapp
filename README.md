@@ -1,7 +1,7 @@
 # TicTacAIapp
 > Java & AI algorithm training
 
-Tic-tac-toe android application game for two players, X and O, who take turns marking the spaces in a 3×3 grid.
+One player Tic-tac-toe game which is implemented as a android application. The player will compete againts the AI who take turns marking the spaces in a 3×3 grid.
 
 ![](header.png)
 
