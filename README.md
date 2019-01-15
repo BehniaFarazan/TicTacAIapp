@@ -9,9 +9,9 @@ One player Tic-tac-toe game which is implemented as a android application. The p
 
 
 ## Status
-The application is very basic in it's current state and only just usable.
+The application is very basic in it's current state and not usable.
 
-Currently in development.
+Currently in AI development.
 
 ## Meta
 
