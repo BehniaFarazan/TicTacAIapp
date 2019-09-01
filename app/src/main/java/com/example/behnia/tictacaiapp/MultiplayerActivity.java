@@ -19,16 +19,16 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
 
     private final MultiplayerLogic mylogic = MultiplayerLogic.getInstance();
 
-    private static final Button[][] btnArray = new Button[3][3];
+    private static final Button[][] btnArray = new Button[4][4];
 
-    int[][] btnIdArray = {{R.id.button_00, R.id.button_01, R.id.button_02}, {R.id.button_10, R.id.button_11, R.id.button_12}, {R.id.button_20, R.id.button_21, R.id.button_22}};
+    int[][] btnIdArray = {{R.id.button_00, R.id.button_01, R.id.button_02, R.id.button_03}, {R.id.button_10, R.id.button_11, R.id.button_12,R.id.button_13}, {R.id.button_20, R.id.button_21, R.id.button_22,R.id.button_23}, {R.id.button_30, R.id.button_31, R.id.button_32,R.id.button_33}};
 
     static int totalcounter;
     static int choisecounterP1;
     static int choisecounterP2;
     static ArrayList<Double> p1Locs = new ArrayList<Double>();
     static ArrayList<Double> p2Locs = new ArrayList<Double>();
-    static boolean p1WON,p2WON;
+    static boolean p1WON, p2WON;
 
 
     public static ArrayList<Double> getP1Locs() {
@@ -117,16 +117,16 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
                 btnArray[i][j] = (Button) findViewById(btnIdArray[i][j]);
                 if (btnArray[i][j].getText().equals("X")) {
                     double xy = Double.parseDouble(i + "." + j);
-                    if (p1Locs.contains(xy)){
+                    if (p1Locs.contains(xy)) {
 
-                    }else{
-                    p1Locs.add(xy);
+                    } else {
+                        p1Locs.add(xy);
                     }
                 } else if (btnArray[i][j].equals("O")) {
                     double xy = Double.parseDouble(i + "." + j);
-                    if (p2Locs.contains(xy)){
+                    if (p2Locs.contains(xy)) {
 
-                    }else{
+                    } else {
                         p2Locs.add(xy);
                     }
                 }
@@ -154,39 +154,57 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
         if (view instanceof Button) {
             totalcounter++;
             if (mylogic.cheackTurn()) {
+//            if (mylogic.randomTurn()) {
                 p1Choice(view);
             } else {
                 p2Choice(view);
             }
             view.setEnabled(false);
             checkLocs();
-           // mylogic.cheackWin();
+            // mylogic.cheackWin();
             if (mylogic.cheackWin()) {
                 if (mylogic.cheackTurn()) {
                     p1WON = true;
                     p2WON = false;
+                } else {
+                    p2WON = true;
+                    p1WON = false;
                 }
-            else {
-                p2WON = true;
-                p1WON = false;
-            }
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Look at this dialog!")
+                builder.setMessage("Finished game")
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                 Intent i = new Intent(MultiplayerActivity.this, FinitogameActivity.class);
+                                Intent i = new Intent(MultiplayerActivity.this, FinitogameActivity.class);
                                 startActivity(i);
                             }
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
 
+            }
+            if (mylogic.cheackDraw()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("It is a draw!Want to play again?")
+                        .setCancelable(true)
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent s = new Intent(MultiplayerActivity.this, GameMenuActivity.class);
+                                startActivity(s);
+                            }
+                        })
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                Intent i = new Intent(MultiplayerActivity.this, MultiplayerActivity.class);
+                                startActivity(i);
+                            }
+                        }).create().show();
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
         }
-        }
-
-
-
 
 
         //public void wrongGuess(View view) {
@@ -204,5 +222,10 @@ public class MultiplayerActivity extends AppCompatActivity implements View.OnCli
             p2Score.setText(String.valueOf(getChoisecounterP2()));
         }*/
     }
+    public void onBackPressed() {
 
+        Intent i = new Intent(MultiplayerActivity.this, GameMenuActivity.class);
+        startActivity(i);
+
+    }
 }

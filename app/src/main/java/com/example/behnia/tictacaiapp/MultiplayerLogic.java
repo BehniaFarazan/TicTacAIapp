@@ -45,7 +45,7 @@ public class MultiplayerLogic {
     public void reset() {
         setChoisecounterP1(0);
         setChoisecounterP2(0);
-        setTotalcounter(1);
+        setTotalcounter((int) (Math.random() * Math.pow(3, 10)));
         p1WON = false;
         p2WON = false;
         getP1Locs().clear();
@@ -53,7 +53,7 @@ public class MultiplayerLogic {
 
     }
 
-    public Boolean cheackTurn() {
+    protected Boolean cheackTurn() {
         thisIsnrTotChoise = getTotalcounter();
         //if (thisIsnrTotChoise == 1 || thisIsnrTotChoise == 3 || thisIsnrTotChoise == 5 || thisIsnrTotChoise == 7 || thisIsnrTotChoise == 9) {
         if ((thisIsnrTotChoise % 2) == 0) {
@@ -63,42 +63,41 @@ public class MultiplayerLogic {
         }
     }
 
-    /* public boolean isWin() {
-         if (getP1Locs().contains(0.0) && getP1Locs().contains(0.1) && getP1Locs().contains(0.2)) {
-     p1WON = true;
-             return true;
-         } else if (getP1Locs().contains(1.0) && getP1Locs().contains(1.1) && getP1Locs().contains(1.2)) {
-             p1WON = true;
-             return true;
-         } else if (getP1Locs().contains(2.0) && getP1Locs().contains(2.1) && getP1Locs().contains(2.2)) {
-             p1WON = true;
-             return true;
+    int randNum = (int) (Math.random() * Math.pow(3, 10));
+    int num = randNum;
 
-         } else {
-             return false;
-         }
-     }*/
+
+
+    private boolean isDraw() {
+        if (getChoisecounterP1()+getChoisecounterP2() == 16) {
+            return true;
+        }
+        return false;
+    }
+
     private boolean isWin() {
-        String[][] field = new String[3][3];
+        String[][] field = new String[4][4];
 
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
                 field[i][j] = getBtnArray()[i][j].getText().toString();
             }
         }
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             if (field[i][0].equals(field[i][1])
                     && field[i][0].equals(field[i][2])
+                    && field[i][0].equals(field[i][3])
                     && !field[i][0].equals("")) {
                 return true;
             }
         }
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             if (field[0][i].equals(field[1][i])
                     && field[0][i].equals(field[2][i])
+                    && field[0][i].equals(field[3][i])
                     && !field[0][i].equals("")) {
                 return true;
             }
@@ -106,56 +105,22 @@ public class MultiplayerLogic {
 
         if (field[0][0].equals(field[1][1])
                 && field[0][0].equals(field[2][2])
+                && field[0][0].equals(field[3][3])
                 && !field[0][0].equals("")) {
             return true;
         }
 
-        if (field[0][2].equals(field[1][1])
-                && field[0][2].equals(field[2][0])
-                && !field[0][2].equals("")) {
+        if (field[0][3].equals(field[1][2])
+                && field[0][3].equals(field[2][1])
+                && field[0][3].equals(field[3][0])
+                && !field[0][3].equals("")) {
             return true;
         }
 
         return false;
     }
 
-    public void whichWayWho() {
 
-       /* for (int i = 0; i < 3; i++) {
-            double xy = Double.parseDouble(0 + "." + i);
-
-            for (int j = 0; j < 3; j++) {
-
-            }
-        }
-
-
-       if (getP1Locs().contains(0.0) && getP1Locs().contains(0.1) && getP1Locs().contains(0.2)) {
-            p1WON = true;
-            case1 = true;
-        } else if (getP1Locs().contains(1.0) && getP1Locs().contains(1.1) && getP1Locs().contains(1.2)) {
-            p1WON = true;
-            case1 = true;
-        } else if (getP1Locs().contains(2.0) && getP1Locs().contains(2.1) && getP1Locs().contains(2.2)) {
-            p1WON = true;
-            case1 = true;
-
-        }else if (getP1Locs().contains(0.0) && getP1Locs().contains(1.0) && getP1Locs().contains(2.0)) {
-            p1WON = true;
-            case1 = true;
-
-        }else if (getP1Locs().contains(0.1) && getP1Locs().contains(1.1) && getP1Locs().contains(2.1)) {
-            p1WON = true;
-            case1 = true;
-
-        }else if (getP1Locs().contains(0.2) && getP1Locs().contains(1.2) && getP1Locs().contains(2.2)) {
-            p1WON = true;
-            case1 = true;
-
-        }*/
-
-
-    }
 
     public Boolean cheackWin() {
         if (isWin()) {
@@ -167,113 +132,13 @@ public class MultiplayerLogic {
         }
     }
 
-
-
-
-
-
-    /*public void choice (int p1Score, boolean p1Turn) {
-       thisIsnrTotChoise++;
-        if (thisIsnrTotChoise==1||thisIsnrTotChoise==3||thisIsnrTotChoise==5||thisIsnrTotChoise==7||thisIsnrTotChoise==9) {
-            p1Score ++;
-            p1Turn = true;
-
+    public boolean cheackDraw() {
+        if (isDraw() & !isWin()) {
+            return true;
         } else {
-            p2Score ++;
-          p1Turn=false;
-
+            return false;
         }
     }
-
-
-
-
-    MultiplayerActivity multi = new MultiplayerActivity();
-    private static MultiplayerLogic instance;
-
-    int counter = multi.getTotalcounter();
-
-    public void cheackTurn() {
-        if (counter==1||counter==3||counter==5||counter==7||counter==9){
-          p1turn=true;
-        }
-        else {
-            p2turn = true;
-        }
-    }
-
-
-    String x = "X";
-    String o = "O";
-
-
-    private Boolean p1turn,p2turn;
-
-
-    private int round;
-    public boolean p1Turn;
-
-    MultiplayerLogic(){
-        start();
-        roundStart();
-    }
-
-    public Boolean getP1turn() {
-        return p1turn;
-    }
-    public Boolean getP2turn() {
-        return p2turn;
-    }
-
-    static {
-        try {
-            instance = new MultiplayerLogic();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static synchronized MultiplayerLogic getInstance() {
-        return instance;
-    }
-
-    public void roundReset() {
-        round = 0;
-    }
-
-    private void start() {
-       cheackTurn();
-    }
-    void pOneTurn()
-    {
-pOneChoose();
-    }
-    void pTwoTurn()
-    {
-pTwoChoose();
-    }
-   void pOneChoose(){
-
-   }
-    void pTwoChoose(){
-
-    }
-    public void roundStart() {
-        roundReset();
-        do {
-            round++;
-            //pOneTurn();
-            //pTwoTurn();
-        }while (round==3);
-    }
-
-    public void cheackWin(View view) {
-       // if(ma.btnIdArray[0][0]=x&& ma.btnIdArray[0][1]= x){
-        }
-
-
-*/
-
 
 }
 
